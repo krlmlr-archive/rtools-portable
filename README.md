@@ -1,17 +1,17 @@
 
 
-r-portable (branch: master-single)
-==========
-[![Build status](https://ci.appveyor.com/api/projects/status/w016xch3qm00msde/branch/master-single)](https://ci.appveyor.com/project/krlmlr/r-portable/branch/master-single)
+rtools-portable
+===============
+[![Build status](https://ci.appveyor.com/api/projects/status/github/krlmlr/rtools-portable/branch/master-single)](https://ci.appveyor.com/project/krlmlr/r-portable/branch/master-single)
 
-Archives and disk images that contain everything necessary to build R packages on Windows.
+Archives and disk images that contain Rtools which is needed to build R packages with C/C++ or Fortran code on Windows.
 
 Built by [AppVeyor](http://www.appveyor.com/). Uses [innounp](http://innounp.sourceforge.net/) and [the cygwin port of cdrtools](http://www.student.tugraz.at/thomas.plank/index_en.html).
 
 ## Download
 
-Most recent version: [R.tar.gz](https://rportable.blob.core.windows.net/r-portable/master-single/R.tar.gz) [R.iso.gz](https://rportable.blob.core.windows.net/r-portable/master-single/R.iso.gz) [R.vhd.gz](https://rportable.blob.core.windows.net/r-portable/master-single/R.vhd.gz)
+Most recent version: [Rtools.tar.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.tar.gz) [Rtools.iso.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.iso.gz) [Rtools.vhd.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.vhd.gz)
 
 Hashes, file sizes, and image contents are listed in a [separate file](hash.md).
 
-Earlier versions are available through the [AppVeyor build history](https://ci.appveyor.com/project/krlmlr/r-portable/history) in the corresponding "ARTIFACTS" section of the individual builds.  ([Direct link](https://ci.appveyor.com/project/krlmlr/r-portable/build/artifacts) to the artifacts for the *latest* build.)
+Earlier versions are available through the [AppVeyor build history](https://ci.appveyor.com/project/krlmlr/r-portable/history) in the corresponding "ARTIFACTS" section of the individual builds.  ([Direct link](https://ci.appveyor.com/project/krlmlr/rtools-portable/build/artifacts) to the artifacts for the *latest* build.)
