@@ -87,8 +87,8 @@ Function CreateImage {
 
     If ($StatusOutput.Length -ne 0) {
         Progress "Mounting VHD file."
-        Exec { bash -c 'gunzip -c R-empty.vhd.gz > R.vhd' }
-        $ImageFullPath = Get-ChildItem "R.vhd" | % { $_.FullName }
+        Exec { bash -c 'gunzip -c R-empty.vhd.gz > Rtools.vhd' }
+        $ImageFullPath = Get-ChildItem "Rtools.vhd" | % { $_.FullName }
         $ImageFullPath
 
         $VHDPath = [string](Mount-DiskImage -ImagePath $ImageFullPath -Passthru | Get-DiskImage | Get-Disk | Get-Partition | Get-Volume).DriveLetter + ":"
@@ -104,19 +104,19 @@ Function CreateImage {
         cp -Recurse "Image\*" ($VHDPath + "\")
 
         Progress "Creating ISO file."
-        Exec { .\Tools\cdrtools\mkisofs -o R.iso -V R-portable -R -J Image }
+        Exec { .\Tools\cdrtools\mkisofs -o Rtools.iso -V R-portable -R -J Image }
 
         Progress "Compressing ISO file."
-        Exec { bash -c 'gzip -c R.iso > R.iso.gz' }
+        Exec { bash -c 'gzip -c Rtools.iso > Rtools.iso.gz' }
 
         Progress "Creating TAR-GZ file."
-        Exec { bash -c 'cd Image && tar -c * | gzip -c > ../R.tar.gz' }
+        Exec { bash -c 'cd Image && tar -c * | gzip -c > ../Rtools.tar.gz' }
 
         Progress "Unmounting VHD file."
         Dismount-DiskImage -ImagePath $ImageFullPath
 
         Progress "Compressing VHD file."
-        Exec { bash -c 'gzip -c R.vhd > R.vhd.gz' }
+        Exec { bash -c 'gzip -c Rtools.vhd > Rtools.vhd.gz' }
     }
 
     If (($StatusOutput.Length + $StatusOutputReadme.Length) -ne 0) {
