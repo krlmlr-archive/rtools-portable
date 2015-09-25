@@ -103,15 +103,6 @@ Function CreateImage {
         Progress "Copying to VHD file."
         cp -Recurse "Image\*" ($VHDPath + "\")
 
-        Progress "Creating ISO file."
-        Exec { .\Tools\cdrtools\mkisofs -o Rtools.iso -V R-portable -R -J Image }
-
-        Progress "Compressing ISO file."
-        Exec { bash -c 'gzip -c Rtools.iso > Rtools.iso.gz' }
-
-        Progress "Creating TAR-GZ file."
-        Exec { bash -c 'cd Image && tar -c * | gzip -c > ../Rtools.tar.gz' }
-
         Progress "Unmounting VHD file."
         Dismount-DiskImage -ImagePath $ImageFullPath
 
