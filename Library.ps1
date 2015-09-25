@@ -49,28 +49,13 @@ Function DownloadAndUnpack {
     Progress ("Version: " + $version)
 
     If ($version -eq "master") {
-        $url_path = ""
-        $version = "devel"
-    }
-    ElseIf ($version -eq "stable") {
-        $url_path = ""
-        $version = $(ConvertFrom-JSON $(Invoke-WebRequest http://rversions.r-pkg.org/r-release).Content).version
-    }
-    ElseIf ($version -eq "patched") {
-        $url_path = ""
-        $version = $(ConvertFrom-JSON $(Invoke-WebRequest http://rversions.r-pkg.org/r-release).Content).version + "patched"
+        Progress "Determining Rtools version"
+        $rtoolsver = $(Invoke-WebRequest http://cran.r-project.org/bin/windows/Rtools/VERSION.txt).Content.Split(' ')[2].Split('.')[0..1] -Join ''
     }
     Else {
-        $url_path = ("old/" + $version + "/")
+        $rtoolsver = $version
     }
 
-    $rurl = "http://cran.r-project.org/bin/windows/base/" + $url_path + "R-" + $version + "-win.exe"
-
-    Progress ("Downloading R from: " + $rurl)
-    Invoke-WebRequest $rurl -OutFile .\DL\R-win.exe
-
-    Progress "Determining Rtools version"
-    $rtoolsver = $(Invoke-WebRequest http://cran.r-project.org/bin/windows/Rtools/VERSION.txt).Content.Split(' ')[2].Split('.')[0..1] -Join ''
     $rtoolsurl = "http://cran.r-project.org/bin/windows/Rtools/Rtools$rtoolsver.exe"
 
     Progress ("Downloading Rtools from: " + $rtoolsurl)
@@ -79,22 +64,6 @@ Function DownloadAndUnpack {
     Progress "Preparing image"
     rm -Recurse -Force .\Image
     md .\Image
-
-    # R
-    Progress "Extracting R"
-    .\Tools\innounp\innounp.exe -x -dImage .\DL\R-win.exe > .\R-win.log
-    mv ".\Image\{app}" .\Image\R
-    rm .\Image\install_script.iss
-
-    # R site library
-    Progress "Creating site library"
-    Exec { .\Image\R\bin\x64\Rscript.exe -e ".libPaths()" }
-    md .\Image\R\site-library
-    Exec { .\Image\R\bin\x64\Rscript.exe -e ".libPaths()" }
-
-    # Additional R packages
-    Progress "Installing additional packages"
-    Exec { .\Image\R\bin\x64\Rscript.exe -e "install.packages(commandArgs(TRUE), repos='http://cran.r-project.org')" devtools testthat knitr plyr } > .\R-packages.log
 
     # Rtools
     Progress "Extracting Rtools"
@@ -110,20 +79,11 @@ Function CreateImage {
     [CmdletBinding()]
     Param()
 
-    If ($env:APPVEYOR_REPO_NAME -eq "krlmlr/r-portable") {
-        # Image sizes have been removed from README,
-        # so that README can be built before the images are available.
-        Progress "Knitting README."
-        Exec { .\Image\R\bin\x64\Rscript.exe -e "knitr::knit('README.Rmd')" }
-    }
-
     Progress "Adding files from image."
     Exec { git add -A Image DELETE_ME_TO_FORCE_REBUILD README.md }
 
     Progress "Checking status."
     $StatusOutput = (git status Image DELETE_ME_TO_FORCE_REBUILD --porcelain) | Out-String
-
-    $StatusOutputReadme = (git status README.md --porcelain) | Out-String
 
     If ($StatusOutput.Length -ne 0) {
         Progress "Mounting VHD file."
@@ -157,17 +117,6 @@ Function CreateImage {
 
         Progress "Compressing VHD file."
         Exec { bash -c 'gzip -c R.vhd > R.vhd.gz' }
-
-        If ($env:APPVEYOR_REPO_NAME -eq "krlmlr/r-portable") {
-            # The image sizes are part of the knitted document,
-            # therefore knitting must happen after the images are built.
-            Progress "Knitting hash."
-            Exec { .\Image\R\bin\x64\Rscript.exe -e "knitr::knit('hash.Rmd')" }
-
-            Progress "Also adding hash to Git."
-            Exec { git add hash.md }
-            Exec { git status hash.md }
-        }
     }
 
     If (($StatusOutput.Length + $StatusOutputReadme.Length) -ne 0) {
