@@ -2,7 +2,7 @@
 
 rtools-portable
 ===============
-[![Build status](https://ci.appveyor.com/api/projects/status/github/krlmlr/rtools-portable/branch/master-single)](https://ci.appveyor.com/project/krlmlr/r-portable/branch/master-single)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/krlmlr/rtools-portable/branch/master)](https://ci.appveyor.com/project/krlmlr/rtools-portable/branch/master)
 
 Archives and disk images that contain Rtools which is needed to build R packages with C/C++ or Fortran code on Windows.
 
