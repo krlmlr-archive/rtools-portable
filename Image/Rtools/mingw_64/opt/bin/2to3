@@ -1,0 +1,5 @@
+#!/home/Jeroen/mingw-gcc-4.9.3/x86_64-493-posix-seh-rt_v3-s/mingw64/opt/bin/python2.7.exe
+import sys
+from lib2to3.main import main
+
+sys.exit(main("lib2to3.fixes"))
