@@ -144,7 +144,7 @@ Function SetupGit {
     Exec { git config -l }
 
     Progress "Setting Git remotes."
-    Exec { git remote set-url origin git@github.com:krlmlr/r-portable.git }
+    Exec { git remote set-url origin git@github.com:krlmlr/rtools-portable.git }
     Exec { git remote -v }
 
     Progress "Deleting out branch."
