@@ -10,6 +10,6 @@ Built by [AppVeyor](http://www.appveyor.com/). Uses [innounp](http://innounp.sou
 
 ## Download
 
-Most recent version: [Rtools.tar.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.tar.gz) [Rtools.iso.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.iso.gz) [Rtools.vhd.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.vhd.gz)
+Most recent version: [Rtools.iso.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.iso.gz) [Rtools.vhd.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.vhd.gz)
 
 Earlier versions are available through the [AppVeyor build history](https://ci.appveyor.com/project/krlmlr/rtools-portable/history) in the corresponding "ARTIFACTS" section of the individual builds.  ([Direct link](https://ci.appveyor.com/project/krlmlr/rtools-portable/build/artifacts) to the artifacts for the *latest* build.)
