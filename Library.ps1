@@ -109,9 +109,6 @@ Function CreateImage {
         Progress "Compressing ISO file."
         Exec { bash -c 'gzip -c Rtools.iso > Rtools.iso.gz' }
 
-        Progress "Creating TAR-GZ file."
-        Exec { bash -c 'cd Image && tar -c * | gzip -c > ../Rtools.tar.gz' }
-
         Progress "Unmounting VHD file."
         Dismount-DiskImage -ImagePath $ImageFullPath
 
