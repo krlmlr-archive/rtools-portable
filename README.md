@@ -12,6 +12,4 @@ Built by [AppVeyor](http://www.appveyor.com/). Uses [innounp](http://innounp.sou
 
 Most recent version: [Rtools.tar.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.tar.gz) [Rtools.iso.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.iso.gz) [Rtools.vhd.gz](https://rportable.blob.core.windows.net/r-portable/master/Rtools.vhd.gz)
 
-Hashes, file sizes, and image contents are listed in a [separate file](hash.md).
-
 Earlier versions are available through the [AppVeyor build history](https://ci.appveyor.com/project/krlmlr/r-portable/history) in the corresponding "ARTIFACTS" section of the individual builds.  ([Direct link](https://ci.appveyor.com/project/krlmlr/rtools-portable/build/artifacts) to the artifacts for the *latest* build.)
