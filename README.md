@@ -1,4 +1,6 @@
+# I'm not working on this project anymore
 
+The Rtools installer downloads and installs fast enough, this cannot be beaten by downloading and extracting an image.
 
 rtools-portable
 ===============
